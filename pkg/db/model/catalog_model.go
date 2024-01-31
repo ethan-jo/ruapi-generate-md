@@ -2,6 +2,7 @@ package model
 
 import (
 	"database/sql"
+
 	"gorm.io/gorm"
 )
 
@@ -32,5 +33,11 @@ func (c *Catalog) TakeCatalogs(ItemId sql.NullInt32) (catalogs []*Catalog, err e
 func (c *Catalog) TakeSubCatalogs(ItemId sql.NullInt32, cataId sql.NullInt32) (catalogs []*Catalog, err error) {
 	catalog := &Catalog{}
 	err = c.Conn.Model(catalog).Where("item_id = ? And parent_cat_id = ?", ItemId, cataId).Find(&catalogs).Order("s_number ASC").Error
+	return catalogs, err
+}
+
+func (c *Catalog) TakeAllCatalogs(ItemId sql.NullInt32) (catalogs []*Catalog, err error) {
+	catalog := &Catalog{}
+	err = c.Conn.Model(catalog).Where("item_id = ?", ItemId).Find(&catalogs).Order("s_number ASC").Error
 	return catalogs, err
 }

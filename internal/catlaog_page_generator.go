@@ -4,12 +4,13 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/ruapi-generate-md/pkg"
-	"github.com/ruapi-generate-md/pkg/db"
-	"github.com/ruapi-generate-md/pkg/db/model"
 	"os"
 	"strings"
 	"sync"
+
+	"github.com/ruapi-generate-md/pkg"
+	"github.com/ruapi-generate-md/pkg/db"
+	"github.com/ruapi-generate-md/pkg/db/model"
 )
 
 var data *db.DataBase

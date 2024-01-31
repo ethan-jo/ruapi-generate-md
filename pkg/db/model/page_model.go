@@ -34,3 +34,9 @@ func (p *Page) TakePages(catId sql.NullInt32, ItemId sql.NullInt32) (pages []*Pa
 	err = p.Conn.Model(page).Where("cat_id = ? And item_id = ? And is_del = 0", catId, ItemId).Find(&pages).Order("s_number ASC").Error
 	return pages, err
 }
+
+func (p *Page) TakeAllPages(ItemId sql.NullInt32) (pages []*Page, err error) {
+	page := &Page{}
+	err = p.Conn.Model(page).Where("item_id = ? And is_del = 0", ItemId).Find(&pages).Order("s_number ASC").Error
+	return pages, err
+}
